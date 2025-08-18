@@ -1,3 +1,7 @@
+:root {
+    --section-spacing: 4rem;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -31,9 +35,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    width: 100%;
+    padding: 0 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -173,7 +176,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.1rem;
     transition: background-color 0.3s;
     text-align: center;
-    justify-self: start;
+    justify-self: center;
 }
 
 .hero-cta:hover {
@@ -182,15 +185,22 @@ h1, h2, h3, h4, h5, h6 {
 
 /* About Section */
 .about {
-    padding: 100px 0;
+    padding: var(--section-spacing) 0;
     background: #f9fafb;
 }
 
 .about h2 {
     font-size: 2.5rem;
     color: #1f2937;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     text-align: left;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
 }
 
 .about-intro {
@@ -220,9 +230,16 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.6;
 }
 
+.about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
 /* Services Section */
 .services {
-    padding: 100px 0;
+    padding: var(--section-spacing) 0;
 }
 
 .services h2 {
@@ -277,7 +294,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Areas Section */
 .areas {
-    padding: 100px 0;
+    padding: var(--section-spacing) 0;
     background: #f9fafb;
 }
 
@@ -319,7 +336,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Contact Section */
 .contact {
-    padding: 100px 0;
+    padding: var(--section-spacing) 0;
 }
 
 .contact h2 {
@@ -405,7 +422,7 @@ h1, h2, h3, h4, h5, h6 {
 .footer {
     background: #1f2937;
     color: white;
-    padding: 50px 0 30px;
+    padding: var(--section-spacing) 0 30px;
 }
 
 .footer-content {
@@ -503,6 +520,11 @@ h1, h2, h3, h4, h5, h6 {
     
     .hero-cta {
         justify-self: center;
+    }
+    
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
     }
     
     .contact-content {
