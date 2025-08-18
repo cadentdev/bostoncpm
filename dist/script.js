@@ -110,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('scroll', () => {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
+    const getQuoteButton = document.querySelector('.cta-button');
     
     let current = '';
     
@@ -125,9 +126,19 @@ window.addEventListener('scroll', () => {
     navLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
+            // Only add active class to non-CTA buttons
+            if (!link.classList.contains('cta-button')) {
+                link.classList.add('active');
+            }
         }
     });
+    
+    // Special handling for Get a Quote button - remove active class when in contact section
+    if (getQuoteButton) {
+        if (current === 'contact') {
+            getQuoteButton.classList.remove('active');
+        }
+    }
 });
 
 // Add hover effect to service cards
