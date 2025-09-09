@@ -4,73 +4,141 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is the BostonCPM one-page website project. Currently, the repository contains only a README.md file and is in its initial setup phase.
+Boston Commercial Property Management (CPM) professional one-page website featuring modern design, comprehensive service information, and automated deployment pipeline.
 
 ## Project Status
 
-This is a complete one-page website for Boston Commercial Property Management built with vanilla HTML, CSS, and JavaScript.
+**COMPLETED** - Full-featured professional website with:
+- Modern responsive design
+- Comprehensive content integration
+- GitHub Actions deployment pipeline
+- SEO optimization and staging controls
 
-## Development Setup
+## Development Workflow
 
-This is a static website that requires no build process. To develop locally:
+This project uses a **development branch workflow**:
 
 ```bash
-# Navigate to the dist folder and start a local development server
+# Work on development branch
+git checkout development
+
+# Local development server
 cd dist
 python3 -m http.server 8000
-# or
-python -m http.server 8000
 
-# Then open http://localhost:8000 in your browser
+# Create PR to deploy to staging
+gh pr create --title "Description" --body "Details"
+
+# Merge to main triggers GitHub Pages deployment
 ```
 
 ## Repository Structure
 
 ```
 /
-├── README.md           - Basic project description  
-├── CLAUDE.md          - This file
-├── dist/              - Production-ready website files
-│   ├── index.html     - Main HTML file
-│   ├── styles.css     - All CSS styles
-│   ├── script.js      - JavaScript functionality
-│   └── assets/
-│       └── images/
-│           ├── bostoncpm_logo.png - Company logo
-│           └── hero.jpg           - Hero section image
-└── sources/           - Source materials and design assets
+├── README.md                 - Project documentation
+├── CLAUDE.md                - This development guide
+├── .gitignore               - Git ignore patterns (includes .DS_Store)
+├── .github/workflows/       - GitHub Actions
+│   └── deploy.yml          - Auto-deployment to GitHub Pages
+├── dist/                   - Production website files
+│   ├── index.html          - Complete one-page website
+│   ├── styles.css          - Modern CSS with variables
+│   ├── script.js           - Interactive functionality
+│   ├── robots.txt          - SEO control (currently blocking)
+│   └── assets/images/      - Optimized images
+└── sources/                - Source materials
     ├── boston_cpm_webpage_text.md - Original content
-    ├── bostoncpm_logo.png         - Logo file
-    ├── site_design.jpg            - Design inspiration
-    └── images/                    - Additional image assets
+    ├── bostoncpm_logo*.png         - Logo variations
+    ├── site_design.jpg             - Design inspiration
+    └── images/                     - Source images
 ```
 
-## Website Features
+## CSS Architecture
 
-- **Responsive Design**: Mobile-first approach with hamburger menu
-- **Smooth Scrolling**: Navigation with smooth scroll to sections
-- **Interactive Elements**: Hover effects, form validation, scroll animations
-- **Contact Form**: Client-side validation (needs backend integration for submission)
-- **SEO Optimized**: Semantic HTML structure and proper meta tags
+**CSS Variables** (centralized in `:root`):
+- `--section-spacing: 4rem` - Consistent vertical spacing
+- `--primary-blue: #0358b5` - Brand color
+- `--primary-blue-hover: #024185` - Hover states
 
-## Code Architecture
+**Key Styling Approaches**:
+- Mobile-first responsive design
+- CSS Grid and Flexbox layouts
+- Font Awesome icons (CDN)
+- Google Fonts: Public Sans (headings), Noto Sans (body)
 
-- **HTML**: Semantic structure with sections for hero, about, services, areas, and contact
-- **CSS**: Modern CSS with Grid and Flexbox layouts, CSS custom properties for theming
-- **JavaScript**: Vanilla JS with event listeners for interactivity, Intersection Observer API for animations
+## JavaScript Features
 
-## Customization
+- Smooth scrolling navigation
+- Mobile hamburger menu
+- Contact form validation
+- Scroll-based animations (Intersection Observer)
+- Dynamic navigation active states
+- Service card hover effects
 
-- Colors can be modified in the `dist/styles.css` file (primary blue: #2563eb)
-- Content is easily editable in the `dist/index.html` file
-- Logo and hero image can be replaced in the `dist/assets/images/` folder
-- Contact form submission needs server-side integration
+## Content Structure
 
-## Deployment
+**Sections**:
+1. **Hero**: Image + overlaid heading, description + CTA below
+2. **About**: 2-column with text + building image
+3. **Services**: 2x2 grid with detailed service cards + FA icons
+4. **Areas**: 2-column with building image + service area list
+5. **Contact**: 2-column with contact info/image + form
+6. **Footer**: 2-column with service areas + logo, centered menu
 
-The `dist/` folder contains all production-ready files and can be deployed to any static hosting service:
-- GitHub Pages
-- Netlify
-- Vercel
-- AWS S3
-- Any web server
+## Deployment Pipeline
+
+**GitHub Actions** (`.github/workflows/deploy.yml`):
+- Triggers on push to `main` branch
+- Deploys `dist/` folder to GitHub Pages
+- No build process required (static files)
+
+**Branch Strategy**:
+- `development` - Active development work
+- `main` - Production deployment trigger
+
+## SEO & Staging
+
+- `robots.txt` currently blocks all indexing (staging mode)
+- Semantic HTML structure for accessibility
+- Proper meta tags and heading hierarchy
+- Clean URLs and fast loading
+
+## Design System
+
+**Colors**:
+- Primary: #0358b5 (buttons, icons, accents)
+- Hover: #024185 (interactive states)
+- Text: #1f2937, #4b5563, #6b7280 (hierarchy)
+
+**Typography**:
+- Headings: Public Sans (professional, geometric)
+- Body: Noto Sans (readable, comprehensive)
+
+**Spacing**:
+- Section padding: 4rem (64px)
+- Consistent use of CSS variables
+
+## Common Development Tasks
+
+**Local Development**:
+```bash
+cd dist && python3 -m http.server 8000
+```
+
+**Update Colors Site-wide**:
+```css
+:root {
+    --primary-blue: #newcolor;
+}
+```
+
+**Deploy Changes**:
+1. Work in `development` branch
+2. Create PR with descriptive title/body
+3. Merge to `main` to trigger deployment
+
+## Contact Form Integration
+
+Current: Client-side validation only
+Future: Requires backend service for form submission (Netlify Forms, Formspree, etc.)
