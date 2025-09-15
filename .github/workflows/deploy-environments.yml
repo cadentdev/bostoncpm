@@ -47,13 +47,26 @@ jobs:
           # Main branch goes to root
           cp -r main/dist/* deployment/
 
-          # Other branches go to subdirectories
+          # Other branches go to subdirectories with path fixes
           mkdir -p deployment/new-logo
           cp -r new-logo/dist/* deployment/new-logo/
+
+          # Fix relative paths in new-logo subdirectory
+          sed -i 's|href="favicon.svg"|href="../favicon.svg"|g' deployment/new-logo/index.html
+          sed -i 's|href="styles.css"|href="../styles.css"|g' deployment/new-logo/index.html
+          sed -i 's|src="script.js"|src="../script.js"|g' deployment/new-logo/index.html
+          sed -i 's|src="assets/|src="../assets/|g' deployment/new-logo/index.html
+          sed -i 's|src="../sources/|src="../../sources/|g' deployment/new-logo/index.html
 
           mkdir -p deployment/arial
           cp -r arial/dist/* deployment/arial/
 
+          # Fix relative paths in arial subdirectory
+          sed -i 's|href="favicon.svg"|href="../favicon.svg"|g' deployment/arial/index.html
+          sed -i 's|href="styles.css"|href="../styles.css"|g' deployment/arial/index.html
+          sed -i 's|src="script.js"|src="../script.js"|g' deployment/arial/index.html
+          sed -i 's|src="assets/|src="../assets/|g' deployment/arial/index.html
+          sed -i 's|src="../sources/|src="../../sources/|g' deployment/arial/index.html
           # Create index page with links to all versions
           cat > deployment/versions.html << 'EOF'
           <!DOCTYPE html>
