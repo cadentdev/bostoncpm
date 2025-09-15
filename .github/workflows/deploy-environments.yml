@@ -67,7 +67,6 @@ jobs:
           sed -i 's|src="script.js"|src="../script.js"|g' deployment/arial/index.html
           sed -i 's|src="assets/|src="../assets/|g' deployment/arial/index.html
           sed -i 's|src="../sources/|src="../../sources/|g' deployment/arial/index.html
-
           # Create index page with links to all versions
           cat > deployment/versions.html << 'EOF'
           <!DOCTYPE html>
