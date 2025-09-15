@@ -1,4 +1,4 @@
-name: Deploy Branch Environments
+name: Deploy Multi-Branch to GitHub Pages
 
 on:
   push:
@@ -7,53 +7,92 @@ on:
       - new-logo
       - arial
   workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Branch to deploy'
-        required: true
-        default: 'main'
-        type: choice
-        options:
-          - main
-          - new-logo
-          - arial
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout
+      - name: Checkout main
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.inputs.branch || github.ref_name }}
+          ref: main
+          path: main
 
-      - name: Determine environment
-        id: env
+      - name: Checkout new-logo
+        uses: actions/checkout@v4
+        with:
+          ref: new-logo
+          path: new-logo
+
+      - name: Checkout arial
+        uses: actions/checkout@v4
+        with:
+          ref: arial
+          path: arial
+
+      - name: Build deployment structure
         run: |
-          BRANCH_NAME="${{ github.event.inputs.branch || github.ref_name }}"
-          case $BRANCH_NAME in
-            main)
-              echo "environment=production" >> $GITHUB_OUTPUT
-              echo "url_suffix=" >> $GITHUB_OUTPUT
-              ;;
-            new-logo)
-              echo "environment=new-logo" >> $GITHUB_OUTPUT
-              echo "url_suffix=/new-logo" >> $GITHUB_OUTPUT
-              ;;
-            arial)
-              echo "environment=arial" >> $GITHUB_OUTPUT
-              echo "url_suffix=/arial" >> $GITHUB_OUTPUT
-              ;;
-            *)
-              echo "environment=preview" >> $GITHUB_OUTPUT
-              echo "url_suffix=/preview" >> $GITHUB_OUTPUT
-              ;;
-          esac
+          mkdir -p deployment
+
+          # Main branch goes to root
+          cp -r main/dist/* deployment/
+
+          # Other branches go to subdirectories
+          mkdir -p deployment/new-logo
+          cp -r new-logo/dist/* deployment/new-logo/
+
+          mkdir -p deployment/arial
+          cp -r arial/dist/* deployment/arial/
+
+          # Create index page with links to all versions
+          cat > deployment/versions.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>Boston CPM - All Versions</title>
+              <style>
+                  body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+                  .version { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+                  .version h2 { margin-top: 0; color: #0358b5; }
+                  .version a { color: #0358b5; text-decoration: none; font-weight: bold; }
+                  .version a:hover { text-decoration: underline; }
+              </style>
+          </head>
+          <body>
+              <h1>Boston Commercial Property Management - All Versions</h1>
+
+              <div class="version">
+                  <h2>Production Version</h2>
+                  <p>Main production website with current branding</p>
+                  <a href="./" target="_blank">View Production Site →</a>
+              </div>
+
+              <div class="version">
+                  <h2>New Logo Version</h2>
+                  <p>Updated branding with new logo and official colors</p>
+                  <a href="./new-logo/" target="_blank">View New Logo Version →</a>
+              </div>
+
+              <div class="version">
+                  <h2>Arial Font Version</h2>
+                  <p>New logo with Arial fonts for all text</p>
+                  <a href="./arial/" target="_blank">View Arial Version →</a>
+              </div>
+          </body>
+          </html>
+          EOF
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -61,15 +100,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: './deployment'
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          artifact_name: github-pages
-          preview: ${{ steps.env.outputs.environment != 'production' }}
-
-    environment:
-      name: ${{ steps.env.outputs.environment }}
-      url: ${{ steps.deployment.outputs.page_url }}${{ steps.env.outputs.url_suffix }}
