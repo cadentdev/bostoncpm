@@ -62,6 +62,13 @@ Then open `index.html` in your browser.
 - **Section Spacing**: 4rem (CSS variable: `--section-spacing`)
 - **Typography**: Professional font pairing with proper hierarchy
 
+Here are the hex colors in the Boston Commercial Property Management logo:
+
+#1f5ab0 - Deep Royal Blue (main text color)
+#348fd5 - Sky Blue (lighter blue in the compass/circular element)
+#f7bd00 - Bright Gold/Sunflower Yellow (in the compass star/center point)
+#a0a0a0 - Silver Gray (in the "COMMERCIAL PROPERTY MANAGEMENT" text)
+
 ## 📄 License
 
 © 2025 Boston CPM. All rights reserved.

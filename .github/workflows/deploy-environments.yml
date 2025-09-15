@@ -1,0 +1,159 @@
+name: Deploy Multi-Branch to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main
+
+      - name: Checkout new-logo
+        uses: actions/checkout@v4
+        with:
+          ref: new-logo
+          path: new-logo
+
+      - name: Checkout arial
+        uses: actions/checkout@v4
+        with:
+          ref: arial
+          path: arial
+
+      - name: Build deployment structure
+        run: |
+          mkdir -p deployment
+
+          # Main branch goes to root
+          cp -r main/dist/* deployment/
+
+          # Other branches go to subdirectories
+          mkdir -p deployment/new-logo
+          cp -r new-logo/dist/* deployment/new-logo/
+
+          mkdir -p deployment/arial
+          cp -r arial/dist/* deployment/arial/
+
+          # Create index page with links to all versions
+          cat > deployment/versions.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>Boston CPM - All Versions</title>
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <style>
+                  body {
+                      font-family: Arial, sans-serif;
+                      max-width: 800px;
+                      margin: 50px auto;
+                      padding: 20px;
+                      background: #f8f9fa;
+                  }
+                  h1 {
+                      color: #0358b5;
+                      text-align: center;
+                      margin-bottom: 40px;
+                  }
+                  .version {
+                      margin: 20px 0;
+                      padding: 25px;
+                      background: white;
+                      border: 1px solid #ddd;
+                      border-radius: 8px;
+                      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                  }
+                  .version h2 {
+                      margin-top: 0;
+                      color: #0358b5;
+                  }
+                  .version p {
+                      color: #666;
+                      margin: 10px 0 15px 0;
+                  }
+                  .version a {
+                      color: #0358b5;
+                      text-decoration: none;
+                      font-weight: bold;
+                      background: #f0f7ff;
+                      padding: 8px 16px;
+                      border-radius: 4px;
+                      display: inline-block;
+                      transition: all 0.3s;
+                  }
+                  .version a:hover {
+                      background: #0358b5;
+                      color: white;
+                  }
+                  .note {
+                      background: #e8f4fd;
+                      padding: 15px;
+                      border-radius: 5px;
+                      margin: 30px 0;
+                      border-left: 4px solid #0358b5;
+                  }
+              </style>
+          </head>
+          <body>
+              <h1>Boston Commercial Property Management</h1>
+              <h2 style="text-align: center; color: #666; margin-bottom: 40px;">Version Comparison</h2>
+
+              <div class="note">
+                  <strong>Note:</strong> This page allows you to compare different design and branding versions of the Boston CPM website. Each version showcases different design decisions for evaluation.
+              </div>
+
+              <div class="version">
+                  <h2>🏢 Production Version</h2>
+                  <p>Current production website with existing branding and design</p>
+                  <a href="./" target="_blank">View Production Site →</a>
+              </div>
+
+              <div class="version">
+                  <h2>🎨 New Logo Version</h2>
+                  <p>Updated branding featuring new compass logo design and official Boston CPM colors (#0358b5)</p>
+                  <a href="./new-logo/" target="_blank">View New Logo Version →</a>
+              </div>
+
+              <div class="version">
+                  <h2>🔤 Arial Font Version</h2>
+                  <p>New logo and colors with Arial fonts throughout for a traditional business aesthetic</p>
+                  <a href="./arial/" target="_blank">View Arial Version →</a>
+              </div>
+
+              <div class="note">
+                  <strong>Deployment Info:</strong> This multi-version setup is automatically updated whenever changes are pushed to the main branch. Each version pulls from its respective branch content.
+              </div>
+          </body>
+          </html>
+          EOF
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './deployment'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
