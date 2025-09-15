@@ -7,53 +7,25 @@ on:
       - new-logo
       - arial
   workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Branch to deploy'
-        required: true
-        default: 'main'
-        type: choice
-        options:
-          - main
-          - new-logo
-          - arial
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages-${{ github.ref_name }}"
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages-${{ github.ref_name }}
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.inputs.branch || github.ref_name }}
-
-      - name: Determine environment
-        id: env
-        run: |
-          BRANCH_NAME="${{ github.event.inputs.branch || github.ref_name }}"
-          case $BRANCH_NAME in
-            main)
-              echo "environment=production" >> $GITHUB_OUTPUT
-              echo "url_suffix=" >> $GITHUB_OUTPUT
-              ;;
-            new-logo)
-              echo "environment=new-logo" >> $GITHUB_OUTPUT
-              echo "url_suffix=/new-logo" >> $GITHUB_OUTPUT
-              ;;
-            arial)
-              echo "environment=arial" >> $GITHUB_OUTPUT
-              echo "url_suffix=/arial" >> $GITHUB_OUTPUT
-              ;;
-            *)
-              echo "environment=preview" >> $GITHUB_OUTPUT
-              echo "url_suffix=/preview" >> $GITHUB_OUTPUT
-              ;;
-          esac
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -66,10 +38,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          artifact_name: github-pages
-          preview: ${{ steps.env.outputs.environment != 'production' }}
-
-    environment:
-      name: ${{ steps.env.outputs.environment }}
-      url: ${{ steps.deployment.outputs.page_url }}${{ steps.env.outputs.url_suffix }}
