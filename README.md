@@ -27,13 +27,21 @@ A professional one-page website for Boston Commercial Property Management, featu
 └── sources/              - Source materials and design assets
 ```
 
-## 🚀 Deployment
+## 🚀 Multi-Branch Deployment
 
-This site uses GitHub Actions for automatic deployment to GitHub Pages:
+This site uses a sophisticated GitHub Actions workflow for deploying multiple branch versions to subdirectories of the same GitHub Pages site:
 
-- **Staging**: Automatically deploys from `main` branch
-- **Production files**: Served from `dist/` directory
-- **Custom domain**: Ready for custom domain configuration
+### Live URLs
+- **Production**: https://cadentdev.github.io/bostoncpm/ (main branch)
+- **New Logo**: https://cadentdev.github.io/bostoncpm/new-logo/ (compass logo + official colors)
+- **Arial Version**: https://cadentdev.github.io/bostoncpm/arial/ (new logo + Arial fonts)
+- **Version Index**: https://cadentdev.github.io/bostoncpm/versions.html (comparison page)
+
+### Deployment Strategy
+- **Single Workflow**: Only deploys from `main` branch (satisfies GitHub Pages environment protection)
+- **Multi-Branch Content**: Pulls content from multiple branches during build
+- **Path Fixing**: Automatically corrects relative paths for subdirectory deployments
+- **Custom Domain Ready**: Easy to configure with custom domain
 - **SEO Control**: robots.txt prevents staging indexing
 
 ## 🛠️ Development
@@ -57,17 +65,48 @@ Then open `index.html` in your browser.
 
 ## 🎨 Design System
 
+### Brand Versions
+- **Production**: Original branding (main branch)
+- **New Logo**: Compass logo with official colors (new-logo branch)
+- **Arial Version**: New logo with Arial fonts (arial branch)
+
+### Color System
 - **Primary Color**: #0358b5 (CSS variable: `--primary-blue`)
 - **Hover Color**: #024185 (CSS variable: `--primary-blue-hover`)
 - **Section Spacing**: 4rem (CSS variable: `--section-spacing`)
 - **Typography**: Professional font pairing with proper hierarchy
 
-Here are the hex colors in the Boston Commercial Property Management logo:
+### Logo Colors (New Branding)
+- **#1f5ab0** - Deep Royal Blue (main text color)
+- **#348fd5** - Sky Blue (lighter blue in the compass/circular element)
+- **#f7bd00** - Bright Gold/Sunflower Yellow (in the compass star/center point)
+- **#a0a0a0** - Silver Gray (in the "COMMERCIAL PROPERTY MANAGEMENT" text)
 
-#1f5ab0 - Deep Royal Blue (main text color)
-#348fd5 - Sky Blue (lighter blue in the compass/circular element)
-#f7bd00 - Bright Gold/Sunflower Yellow (in the compass star/center point)
-#a0a0a0 - Silver Gray (in the "COMMERCIAL PROPERTY MANAGEMENT" text)
+### Branch-Specific Features
+- **new-logo branch**: SVG favicon, compass logo, official brand colors
+- **arial branch**: Same new branding but Arial fonts throughout (vs Public Sans/Noto Sans)
+
+## ⚙️ Technical Implementation
+
+### Multi-Branch Deployment Workflow
+The `.github/workflows/deploy-environments.yml` workflow:
+
+1. **Triggers**: Only on push to `main` branch (satisfies GitHub Pages environment protection rules)
+2. **Content Sourcing**: Checks out main, new-logo, and arial branches separately
+3. **Directory Structure**:
+   - Main branch content → root directory
+   - Other branches → subdirectories (`/new-logo/`, `/arial/`)
+4. **Path Fixing**: Uses sed commands to fix relative paths in subdirectory HTML files:
+   - `href="styles.css"` → `href="../styles.css"`
+   - `src="assets/"` → `src="../assets/"`
+   - `src="script.js"` → `src="../script.js"`
+5. **Version Index**: Generates styled comparison page at `/versions.html`
+
+### Key Features
+- **Environment Protection Compliant**: Resolves GitHub Pages branch restrictions
+- **Automatic Updates**: Any push to main triggers deployment of all branch versions
+- **Shared Resources**: CSS, JS, and assets served from root, referenced by subdirectories
+- **404 Prevention**: Relative path fixes ensure all resources load correctly
 
 ## 📄 License
 

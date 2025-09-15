@@ -88,14 +88,19 @@ gh pr create --title "Description" --body "Details"
 
 ## Deployment Pipeline
 
-**GitHub Actions** (`.github/workflows/deploy.yml`):
-- Triggers on push to `main` branch
-- Deploys `dist/` folder to GitHub Pages
-- No build process required (static files)
+**Multi-Branch GitHub Pages Deployment** (`.github/workflows/deploy-environments.yml`):
+- Triggers on push to `main` branch only (satisfies environment protection rules)
+- Deploys multiple branch versions to subdirectories of same GitHub Pages site
+- Pulls content from main, new-logo, and arial branches during build
+- Fixes relative paths for subdirectory deployments using sed commands
 
-**Branch Strategy**:
-- `development` - Active development work
-- `main` - Production deployment trigger
+**Branch Strategy & URLs**:
+- `main` - Production deployment → `https://cadentdev.github.io/bostoncpm/`
+- `new-logo` - New branding version → `https://cadentdev.github.io/bostoncpm/new-logo/`
+- `arial` - Arial font version → `https://cadentdev.github.io/bostoncpm/arial/`
+- `development` - Active development work (not auto-deployed)
+
+**Version Index**: `https://cadentdev.github.io/bostoncpm/versions.html` - Styled comparison page
 
 ## SEO & Staging
 
@@ -134,9 +139,15 @@ cd dist && python3 -m http.server 8000
 ```
 
 **Deploy Changes**:
-1. Work in `development` branch
+1. Work in feature branches (`new-logo`, `arial`, etc.)
 2. Create PR with descriptive title/body
-3. Merge to `main` to trigger deployment
+3. Merge to `main` to trigger multi-branch deployment
+4. Deployment pulls latest from all configured branches automatically
+
+**Add New Branch to Deployment**:
+1. Add branch name to `.github/workflows/deploy-environments.yml` trigger list
+2. Add corresponding sed commands for relative path fixes
+3. Update version index page if desired
 
 ## Contact Form Integration
 
