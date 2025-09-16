@@ -1,7 +1,35 @@
 :root {
     --section-spacing: 4rem;
-    --primary-blue: #1f5ab0;
-    --primary-blue-hover: #1a4e9a;
+
+    /* Brand Colors (from logo) */
+    --brand-primary: #1f5ab0;        /* Deep Royal Blue - primary brand color */
+    --brand-secondary: #348fd5;      /* Sky Blue - secondary brand accent */
+    --brand-accent: #f7bd00;         /* Bright Gold - accent/highlight color */
+    --brand-neutral: #a0a0a0;        /* Silver Gray - secondary text */
+
+    /* Interactive Colors */
+    --primary-hover: #1a4e9a;        /* Hover state for primary elements */
+    --secondary-hover: #024185;      /* Darker hover state */
+
+    /* Text Colors */
+    --text-primary: #1f2937;         /* Primary text - headings, important content */
+    --text-secondary: #4b5563;       /* Secondary text - body text, descriptions */
+    --text-tertiary: #6b7280;        /* Tertiary text - captions, muted content */
+    --text-dark: #333;               /* Dark text for navigation */
+
+    /* Background Colors */
+    --bg-primary: #fff;              /* Primary background - white */
+    --bg-secondary: #f9fafb;         /* Secondary background - light gray */
+    --bg-dark: #1f2937;              /* Dark background - footer */
+
+    /* Footer Colors */
+    --footer-text-light: #f3f4f6;    /* Light text in footer */
+    --footer-text-muted: #9ca3af;    /* Muted text in footer */
+    --footer-links: #d1d5db;         /* Footer link color */
+    --footer-border: #374151;        /* Footer border color */
+
+    /* Form & UI Colors */
+    --border-light: #e5e7eb;         /* Light borders for forms */
 }
 
 * {
@@ -13,7 +41,7 @@
 body {
     font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
-    color: #333;
+    color: var(--text-dark);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -28,7 +56,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Navigation */
 .navbar {
-    background: #fff;
+    background: var(--bg-primary);
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     position: fixed;
     top: 0;
@@ -68,17 +96,17 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-menu a {
     text-decoration: none;
-    color: #333;
+    color: var(--text-dark);
     font-weight: 500;
     transition: color 0.3s;
 }
 
 .nav-menu a:hover {
-    color: var(--primary-blue);
+    color: var(--brand-primary);
 }
 
 .nav-menu a.active {
-    color: var(--primary-blue);
+    color: var(--brand-primary);
     position: relative;
 }
 
@@ -89,7 +117,7 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     right: 0;
     height: 2px;
-    background: var(--primary-blue);
+    background: var(--brand-primary);
 }
 
 .cta-button {
@@ -113,7 +141,7 @@ h1, h2, h3, h4, h5, h6 {
 .hamburger span {
     width: 25px;
     height: 3px;
-    background: #333;
+    background: var(--text-dark);
     margin: 3px 0;
     transition: 0.3s;
 }
@@ -170,7 +198,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-content p {
     font-size: 1.25rem;
-    color: #6b7280;
+    color: var(--text-tertiary);
     line-height: 1.6;
     text-align: left;
     margin: 0;
@@ -178,7 +206,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-cta {
     display: inline-block;
-    background: var(--primary-blue);
+    background: var(--brand-primary);
     color: white;
     padding: 16px 32px;
     text-decoration: none;
@@ -191,18 +219,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-cta:hover {
-    background: var(--primary-blue-hover);
+    background: var(--primary-hover);
 }
 
 /* About Section */
 .about {
     padding: var(--section-spacing) 0;
-    background: #f9fafb;
+    background: var(--bg-secondary);
 }
 
 .about h2 {
     font-size: 2.5rem;
-    color: #1f2937;
+    color: var(--text-primary);
     margin-bottom: 50px;
     text-align: left;
 }
@@ -216,26 +244,26 @@ h1, h2, h3, h4, h5, h6 {
 
 .about-intro {
     font-size: 1.2rem;
-    color: #6b7280;
+    color: var(--text-tertiary);
     text-align: left;
     margin-bottom: 30px;
 }
 
 .property-list {
     font-size: 1.1rem;
-    color: #4b5563;
+    color: var(--text-secondary);
     margin-bottom: 30px;
     padding-left: 20px;
 }
 
 .property-list li {
     margin-bottom: 8px;
-    color: #4b5563;
+    color: var(--text-secondary);
 }
 
 .about p {
     font-size: 1.1rem;
-    color: #4b5563;
+    color: var(--text-secondary);
     text-align: left;
     margin-bottom: 20px;
     line-height: 1.6;
@@ -255,14 +283,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .services h2 {
     font-size: 2.5rem;
-    color: #1f2937;
+    color: var(--text-primary);
     margin-bottom: 20px;
     text-align: left;
 }
 
 .services-intro {
     font-size: 1.2rem;
-    color: #6b7280;
+    color: var(--text-tertiary);
     text-align: left;
     margin-bottom: 60px;
 }
@@ -289,20 +317,20 @@ h1, h2, h3, h4, h5, h6 {
 
 .service-icon {
     font-size: 3.5rem;
-    color: var(--primary-blue);
+    color: var(--brand-primary);
     margin-bottom: 25px;
     text-align: center;
 }
 
 .service-card h3 {
     font-size: 1.4rem;
-    color: #1f2937;
+    color: var(--text-primary);
     margin-bottom: 20px;
     line-height: 1.3;
 }
 
 .service-card p {
-    color: #4b5563;
+    color: var(--text-secondary);
     line-height: 1.6;
     margin-bottom: 20px;
 }
@@ -314,7 +342,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .service-card li {
-    color: #4b5563;
+    color: var(--text-secondary);
     line-height: 1.6;
     margin-bottom: 15px;
     position: relative;
@@ -323,7 +351,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .service-card li:before {
     content: '•';
-    color: var(--primary-blue);
+    color: var(--brand-primary);
     font-weight: bold;
     position: absolute;
     left: 0;
@@ -333,15 +361,28 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0;
 }
 
+.service-card .service-cta {
+    display: inline-block;
+    color: var(--brand-primary);
+    padding: 16px 32px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 1.3rem;
+    transition: background-color 0.3s;
+    text-align: center;
+    justify-self: center;
+}
+    
 /* Areas Section */
 .areas {
     padding: var(--section-spacing) 0;
-    background: #f9fafb;
+    background: var(--bg-secondary);
 }
 
 .areas h2 {
     font-size: 2.5rem;
-    color: #1f2937;
+    color: var(--text-primary);
     margin-bottom: 50px;
     text-align: left;
 }
@@ -362,7 +403,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .areas-text p {
     font-size: 1.2rem;
-    color: #6b7280;
+    color: var(--text-tertiary);
     text-align: left;
     margin-bottom: 30px;
     line-height: 1.6;
@@ -379,14 +420,14 @@ h1, h2, h3, h4, h5, h6 {
     background: white;
     padding: 12px 20px;
     border-radius: 25px;
-    color: #4b5563;
+    color: var(--text-secondary);
     font-weight: 500;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     transition: background-color 0.3s, color 0.3s;
 }
 
 .areas-list span:hover {
-    background: var(--primary-blue-hover);
+    background: var(--primary-hover);
     color: white;
 }
 
@@ -397,14 +438,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .contact h2 {
     font-size: 2.5rem;
-    color: #1f2937;
+    color: var(--text-primary);
     margin-bottom: 20px;
     text-align: left;
 }
 
 .contact > .container > p {
     font-size: 1.2rem;
-    color: #6b7280;
+    color: var(--text-tertiary);
     text-align: left;
     margin-bottom: 60px;
 }
@@ -426,13 +467,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .contact-item strong {
     display: block;
-    color: #1f2937;
+    color: var(--text-primary);
     margin-bottom: 5px;
     font-size: 1.1rem;
 }
 
 .contact-item a {
-    color: var(--primary-blue);
+    color: var(--brand-primary);
     text-decoration: none;
 }
 
@@ -449,7 +490,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .contact-form-section h3 {
     font-size: 1.5rem;
-    color: #1f2937;
+    color: var(--text-primary);
     margin-bottom: 30px;
     text-align: left;
 }
@@ -463,7 +504,7 @@ h1, h2, h3, h4, h5, h6 {
 .contact-form input,
 .contact-form textarea {
     padding: 15px;
-    border: 2px solid #e5e7eb;
+    border: 2px solid var(--border-light);
     border-radius: 8px;
     font-size: 1rem;
     font-family: inherit;
@@ -473,11 +514,11 @@ h1, h2, h3, h4, h5, h6 {
 .contact-form input:focus,
 .contact-form textarea:focus {
     outline: none;
-    border-color: var(--primary-blue);
+    border-color: var(--brand-primary);
 }
 
 .contact-form button {
-    background: var(--primary-blue);
+    background: var(--brand-primary);
     color: white;
     padding: 16px 32px;
     border: none;
@@ -489,12 +530,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .contact-form button:hover {
-    background: var(--primary-blue-hover);
+    background: var(--primary-hover);
 }
 
 /* Footer */
 .footer {
-    background: #1f2937;
+    background: var(--bg-dark);
     color: white;
     padding: var(--section-spacing) 0 30px;
 }
@@ -518,14 +559,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer-service-areas h2 {
-    color: #f3f4f6;
+    color: var(--footer-text-light);
     font-size: 1.5rem;
     margin-bottom: 15px;
     text-align: left;
 }
 
 .footer-service-areas p {
-    color: #9ca3af;
+    color: var(--footer-text-muted);
     font-size: 0.875rem;
     line-height: 1.6;
     text-align: left;
@@ -536,7 +577,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .tagline {
-    color: #9ca3af;
+    color: var(--footer-text-muted);
     font-style: italic;
     text-align: center;
     margin-top: 10px;
@@ -550,7 +591,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer-links a {
-    color: #d1d5db;
+    color: var(--footer-links);
     text-decoration: none;
     transition: color 0.3s;
 }
@@ -560,13 +601,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer-bottom {
-    border-top: 1px solid #374151;
+    border-top: 1px solid var(--footer-border);
     padding-top: 20px;
     text-align: center;
 }
 
 .footer-bottom p {
-    color: #9ca3af;
+    color: var(--footer-text-muted);
 }
 
 /* Mobile Responsive */
