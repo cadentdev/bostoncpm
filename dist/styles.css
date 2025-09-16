@@ -121,7 +121,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .cta-button {
-    background: var(--primary-blue) !important;
+    background: var(--brand-primary) !important;
     color: white !important;
     padding: 12px 24px;
     border-radius: 6px;
@@ -129,7 +129,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .cta-button:hover {
-    background: var(--primary-blue-hover) !important;
+    background: var(--primary-hover) !important;
 }
 
 .hamburger {
@@ -226,8 +226,8 @@ h1, h2, h3, h4, h5, h6 {
 .about {
     padding: var(--section-spacing) 0;
     background: var(--bg-secondary);
+    position: relative;
 }
-
 
 .about-content {
     display: grid;
@@ -272,15 +272,16 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 3;
 }
 
-.about {
+.about h2 {
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    margin-bottom: 50px;
+    text-align: left;
     position: relative;
+    z-index: 2;
 }
 
-.about-drop-cap {
-    position: static;
-}
-
-.drop-cap-logo {
+.compass-bg {
     position: absolute;
     height: 600px;
     width: auto;
@@ -290,20 +291,6 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateY(-50%);
     z-index: 1;
     pointer-events: none;
-}
-
-.about-drop-cap h2 {
-    font-size: 2.5rem;
-    color: var(--text-primary);
-    margin-bottom: 50px;
-    text-align: left;
-    position: relative;
-    z-index: 2;
-}
-
-.about-drop-cap .about-intro {
-    position: relative;
-    z-index: 2;
 }
 
 /* Services Section */
@@ -761,7 +748,4 @@ h1, h2, h3, h4, h5, h6 {
         font-size: 2rem;
     }
     
-    .property-types {
-        grid-template-columns: 1fr;
-    }
 }
