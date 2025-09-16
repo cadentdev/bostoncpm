@@ -1311,6 +1311,7 @@
    assets by using the correct relative paths that point back to the root directory
   where the shared resources are located.
 
+<<<<<<< HEAD
 > /export 
   ⎿  Conversation exported to: 2025-09-15-branches-published.txt
 
@@ -1847,3 +1848,5 @@
   You can now work on feature branches with the normal git workflow without any rule
   violation interruptions!
 
+=======
+>>>>>>> ad479190558641399447705d9905535faace1233
