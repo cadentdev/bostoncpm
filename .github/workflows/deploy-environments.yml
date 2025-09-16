@@ -34,11 +34,11 @@ jobs:
           ref: new-logo
           path: new-logo
 
-      - name: Checkout arial
+      - name: Checkout arial-font
         uses: actions/checkout@v4
         with:
-          ref: arial
-          path: arial
+          ref: arial-font
+          path: arial-font
 
       - name: Build deployment structure
         run: |
