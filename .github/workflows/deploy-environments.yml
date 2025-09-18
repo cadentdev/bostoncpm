@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+      - new-logo
+      - arial-font
   workflow_dispatch:
 
 permissions:
@@ -153,7 +155,7 @@ jobs:
               </div>
 
               <div class="note">
-                  <strong>Deployment Info:</strong> This multi-version setup is automatically updated whenever changes are pushed to the main branch. Each version pulls from its respective branch content.
+                  <strong>Deployment Info:</strong> This multi-version setup is automatically updated whenever changes are pushed to any tracked branch (main, new-logo, or arial-font). Each version pulls from its respective branch content.
               </div>
           </body>
           </html>
