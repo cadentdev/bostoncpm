@@ -62,7 +62,7 @@ jobs:
           sed -i 's|src="../sources/|src="../../sources/|g' deployment/new-logo/index.html
 
           mkdir -p deployment/arial
-          cp -r arial/dist/* deployment/arial/
+          cp -r arial-font/dist/* deployment/arial/
 
           # Fix relative paths in arial subdirectory
           sed -i 's|href="favicon.svg"|href="../favicon.svg"|g' deployment/arial/index.html
