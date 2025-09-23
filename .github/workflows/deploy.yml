@@ -23,15 +23,34 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
-        
+
+      - name: Preserve existing development content
+        run: |
+          # Create deployment directory
+          mkdir -p deployment
+
+          # Try to get existing gh-pages content to preserve development subdirectory
+          git fetch origin gh-pages:gh-pages || echo "No existing gh-pages branch"
+          if git show-branch gh-pages 2>/dev/null; then
+            git checkout gh-pages
+            # Copy existing development directory if it exists
+            if [ -d "development" ]; then
+              cp -r development deployment/
+            fi
+            git checkout -
+          fi
+
+          # Copy main site content to deployment root
+          cp -r dist/* deployment/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
-          
+          path: './deployment'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
