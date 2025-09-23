@@ -1,10 +1,10 @@
-name: Deploy Multi-Branch to GitHub Pages
+name: Deploy Development Preview
 
 on:
+  pull_request:
+    branches: [ main ]
   push:
-    branches:
-      - main
-      - development
+    branches: [ development ]
   workflow_dispatch:
 
 permissions:
@@ -17,35 +17,35 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
+  build-and-deploy-preview:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       pages: write
       id-token: write
     steps:
-      - name: Checkout main
+      - name: Checkout current branch
         uses: actions/checkout@v4
-        with:
-          ref: main
-          path: main
 
-      - name: Checkout development
-        uses: actions/checkout@v4
-        with:
-          ref: development
-          path: development
-
-      - name: Build deployment structure
+      - name: Get existing GitHub Pages content
         run: |
+          # Create deployment directory
           mkdir -p deployment
+          
+          # Try to get existing gh-pages content to preserve main site
+          git fetch origin gh-pages:gh-pages || echo "No existing gh-pages branch"
+          if git show-branch gh-pages 2>/dev/null; then
+            git checkout gh-pages
+            # Copy existing content except development directory
+            find . -maxdepth 1 -not -name '.' -not -name '.git' -not -name 'development' -exec cp -r {} deployment/ \;
+            git checkout -
+          fi
 
-          # Main branch goes to root
-          cp -r main/dist/* deployment/
-
-          # Development branch goes to subdirectory with path fixes
+      - name: Build development preview
+        run: |
+          # Create development subdirectory
           mkdir -p deployment/development
-          cp -r development/dist/* deployment/development/
+          cp -r dist/* deployment/development/
 
           # Fix relative paths in development subdirectory
           sed -i 's|href="favicon.svg"|href="../favicon.svg"|g' deployment/development/index.html
@@ -114,10 +114,10 @@ jobs:
           </head>
           <body>
               <h1>Boston Commercial Property Management</h1>
-              <h2 style="text-align: center; color: #666; margin-bottom: 40px;">Environment Comparison</h2>
+              <h2 style="text-align: center; color: #666; margin-bottom: 40px;">Site Environments</h2>
 
               <div class="note">
-                  <strong>Note:</strong> This page allows you to compare the production and development versions of the Boston CPM website.
+                  <strong>Note:</strong> This page allows you to access both the production and development versions of the Boston CPM website.
               </div>
 
               <div class="version">
@@ -127,13 +127,13 @@ jobs:
               </div>
 
               <div class="version">
-                  <h2>🚧 Development Version</h2>
-                  <p>Development version with the latest features and updates in progress</p>
-                  <a href="./development/" target="_blank">View Development Site →</a>
+                  <h2>🚧 Development Preview</h2>
+                  <p>Development preview with the latest features and updates from pull requests</p>
+                  <a href="./development/" target="_blank">View Development Preview →</a>
               </div>
 
               <div class="note">
-                  <strong>Deployment Info:</strong> This setup is automatically updated whenever changes are pushed to the main or development branches. Production reflects the main branch, while development shows work in progress.
+                  <strong>Deployment Info:</strong> The development preview is automatically updated when pull requests are opened or updated. Production is updated when PRs are merged to main.
               </div>
           </body>
           </html>
