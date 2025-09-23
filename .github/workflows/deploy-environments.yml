@@ -51,26 +51,28 @@ jobs:
           cp -r dist/* deployment/development/
 
           # Fix relative paths in development subdirectory
-          # Fix all href and src attributes that reference local files (not URLs starting with http)
-          sed -i 's|href="favicon\.svg"|href="../favicon.svg"|g' deployment/development/index.html
-          sed -i 's|href="styles\.css"|href="../styles.css"|g' deployment/development/index.html
-          sed -i 's|src="script\.js"|src="../script.js"|g' deployment/development/index.html
-          sed -i 's|src="favicon\.svg"|src="../favicon.svg"|g' deployment/development/index.html
+          # Use a simpler approach: fix all local file references that don't already start with ../ or http
           
-          # Fix all assets/ references
+          # Fix assets/ directory references first
           sed -i 's|src="assets/|src="../assets/|g' deployment/development/index.html
           sed -i 's|href="assets/|href="../assets/|g' deployment/development/index.html
           
-          # Fix any other local file references that don't start with http, https, or ../
-          sed -i 's|src="\([^"]*\)\.\(svg\|jpg\|jpeg\|png\|gif\|webp\|js\|css\)"|src="../\1.\2"|g' deployment/development/index.html
-          sed -i 's|href="\([^"]*\)\.\(svg\|jpg\|jpeg\|png\|gif\|webp\|js\|css\)"|href="../\1.\2"|g' deployment/development/index.html
+          # Fix root-level files (anything that doesn't start with http, https, //, or ../)
+          sed -i 's|src="\([^"]*\)"|src="../\1"|g' deployment/development/index.html
+          sed -i 's|href="\([^"]*\)"|href="../\1"|g' deployment/development/index.html
           
-          # Fix double ../ that might have been created
-          sed -i 's|"\.\./\.\./|"../|g' deployment/development/index.html
+          # Fix double ../ that were created
+          sed -i 's|src="\.\./\.\./|src="../|g' deployment/development/index.html
+          sed -i 's|href="\.\./\.\./|href="../|g' deployment/development/index.html
           
-          # Don't break external URLs - revert any changes to http/https URLs
+          # Restore external URLs (don't prefix these with ../)
           sed -i 's|src="../http|src="http|g' deployment/development/index.html
           sed -i 's|href="../http|href="http|g' deployment/development/index.html
+          sed -i 's|src="..///|src="//|g' deployment/development/index.html
+          sed -i 's|href="..///|href="//|g' deployment/development/index.html
+          
+          # Restore hash links and other special cases
+          sed -i 's|href="../#|href="#|g' deployment/development/index.html
           # Create index page with links to all versions
           cat > deployment/versions.html << 'EOF'
           <!DOCTYPE html>
