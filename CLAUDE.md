@@ -89,7 +89,7 @@ gh pr create --title "Description" --body "Details"
 ## Deployment Pipeline
 
 **Multi-Branch GitHub Pages Deployment** (`.github/workflows/deploy-environments.yml`):
-- Triggers on push to `main` branch only (satisfies environment protection rules)
+- Triggers on push to `main`, `new-logo`, or `arial-font` branches (auto-deployment)
 - Deploys multiple branch versions to subdirectories of same GitHub Pages site
 - Pulls content from main, new-logo, and arial branches during build
 - Fixes relative paths for subdirectory deployments using sed commands
