@@ -46,9 +46,15 @@ jobs:
 
       - name: Build development preview
         run: |
-          # Create development subdirectory
+          # Create development subdirectory and copy assets to root for ../references
           mkdir -p deployment/development
           cp -r dist/* deployment/development/
+          
+          # Copy assets to root level so ../assets/ references work
+          cp -r dist/assets deployment/ 2>/dev/null || true
+          cp dist/favicon.svg deployment/ 2>/dev/null || true
+          cp dist/styles.css deployment/ 2>/dev/null || true
+          cp dist/script.js deployment/ 2>/dev/null || true
 
           # Fix relative paths in development subdirectory
           # Use a simpler approach: fix all local file references that don't already start with ../ or http
