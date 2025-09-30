@@ -179,11 +179,11 @@ h1, h2, h3, h4, h5, h6 {
 .hero-overlay {
     position: absolute;
     top: 40px;
-    left: 40px;
+    right: 40px;
     background: rgba(0, 0, 0, 0.7);
     padding: 30px;
     border-radius: 8px;
-    max-width: 45%;
+    max-width: 40%;
 }
 
 .hero-overlay h1 {
@@ -397,6 +397,65 @@ h1, h2, h3, h4, h5, h6 {
     transition: background-color 0.3s;
     text-align: center;
     justify-self: center;
+}
+/* Call to Action Banner */
+.cta-banner {
+    background: var(--brand-primary);
+    padding: 60px 40px;
+    text-align: center;
+}
+
+.cta-banner-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+.cta-text {
+    text-align: left;
+    flex: 1;
+}
+
+.cta-question {
+    color: var(--footer-text-light);
+    font-size: 1.2rem;
+    margin: 0 0 8px 0;
+    font-weight: 400;
+}
+
+.cta-message {
+    color: var(--footer-text-light);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.cta-phone {
+    color: var(--brand-accent);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.cta-phone:hover {
+    text-decoration: underline;
+}
+
+.cta-button-banner {
+    background: var(--brand-secondary);
+    color: white;
+    padding: 18px 36px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+}
+
+.cta-button-banner:hover {
+    background: var(--primary-hover);
 }
     
 /* Areas Section */
@@ -713,6 +772,16 @@ h1, h2, h3, h4, h5, h6 {
     .contact-content {
         grid-template-columns: 1fr;
         gap: 40px;
+    }
+    
+    .cta-banner-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+    
+    .cta-text {
+        text-align: center;
     }
     
     .footer-content {
