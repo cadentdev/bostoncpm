@@ -4,6 +4,16 @@
     - [x] Move overlay text to right side of image
 - [x] Update "Areas We Serve" image to use zoshua-colah image
 - [x] Add "Your property is our priority" banner
+- [ ] Add a navy banner to the top of the page (same color as the current footer) with the sentence that's currently below the hero image
+- [ ] Make the hero image go edge to edge and appears translucent over the top menu
+- [ ] Use a thinner font, particularly in the top menu and the text on the hero image
+- [ ] Add a Client Portal link to the menu
+- [ ] Add an ombre effect to the bottom of the hero image and include "Commercial Property Management" at the bottom, similar to Gravestar's website
+- [ ] Remove the second "Contact Us" button under the hero image
+- [ ] Add a translucent logo to the "Call Us" banner, we'll experiment with logo variations, and Toni will make the final decision
+- [ ] Add a map to the "Areas We Serve" section
+- [ ] Change the footer to a light gray or white, whichever works best with our logo
+- [ ] Swap the "Contact Us" photo with the one currently used in the "Areas We Serve" section
 
 ## Text edits
 
