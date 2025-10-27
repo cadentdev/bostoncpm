@@ -34,7 +34,7 @@ jobs:
         run: |
           # Create deployment directory
           mkdir -p deployment
-
+          
           # Try to get existing gh-pages content to preserve main site
           git fetch origin gh-pages:gh-pages || echo "No existing gh-pages branch"
           if git show-branch gh-pages 2>/dev/null; then
