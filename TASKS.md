@@ -2,10 +2,10 @@
 
 ## Main menu & top banner
 
-- [ ] Add a navy banner to the top of the page (same color as the current footer) with the text: "Maximize your property's potential with our comprehensive management services.
-- [ ] Set the background color of the main menu to be the same light gray as the "Areas We Serve" section
-- [ ] Make the main menu appear translucent over the hero image
-- [ ] Add a Client Portal link to the menu
+- [x] Add a navy banner to the top of the page (same color as the current footer) with the text: "Maximize your property's potential with our comprehensive management services.
+- [x] Set the background color of the main menu to be the same light gray as the "Areas We Serve" section
+- [x] Make the main menu appear translucent over the hero image
+- [x] Add a Client Portal link to the menu
 
 ## Hero image
 
