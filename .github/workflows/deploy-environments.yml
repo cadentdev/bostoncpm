@@ -39,9 +39,29 @@ jobs:
           git fetch origin gh-pages:gh-pages || echo "No existing gh-pages branch"
           if git show-branch gh-pages 2>/dev/null; then
             git checkout gh-pages
-            # Copy existing content except development directory
-            find . -maxdepth 1 -not -name '.' -not -name '.git' -not -name 'development' -exec cp -r {} deployment/ \;
+            # Copy all existing content except development directory and git files
+            for item in *; do
+              if [ "$item" != "development" ] && [ "$item" != ".git" ]; then
+                cp -r "$item" deployment/ 2>/dev/null || true
+              fi
+            done
+            # Also copy hidden files except .git
+            for item in .*; do
+              if [ "$item" != "." ] && [ "$item" != ".." ] && [ "$item" != ".git" ]; then
+                cp -r "$item" deployment/ 2>/dev/null || true
+              fi
+            done
             git checkout -
+          else
+            echo "No existing gh-pages branch found, using main branch content for initial setup"
+            # Get main branch content as initial base
+            git fetch origin main:main || echo "No main branch"
+            if git show-branch main 2>/dev/null; then
+              git checkout main
+              # Copy dist content from main branch to deployment root
+              cp -r dist/* deployment/ 2>/dev/null || true
+              git checkout -
+            fi
           fi
 
       - name: Build development preview
