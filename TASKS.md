@@ -9,20 +9,13 @@
 
 ## Hero image
 
-- [ ] Make the hero image go edge to edge (full width)
-- [ ] Add an ombre effect to the bottom of the hero image and include "Commercial Property Management" at the bottom, similar to Gravestar's website
-- [ ] Remove the second "Contact Us" button under the hero image
-
-## Call Us banner
-
-- [ ] Add a translucent compass logo to the "Call Us" banner
-
-We'll experiment with logo variations, and Toni will make the final decision
+- [x] Make the hero image go edge to edge (full width)
+- [x] Add an ombre (shadow gradient) effect to the bottom of the hero image and move the text overlay "Commercial Property Management" to the bottom, centered on the image width, with no containing rectangle.
+- [x] Make the text overlay "Commercial Property Management" white and bold (800)
 
 ## Areas We Serve section
 
-- [ ] Add a map to the "Areas We Serve" section
-- [ ] Swap the "Contact Us" photo with the one currently used in the "Areas We Serve" section
+- [ ] Replace the "Contact Us" photo with the one currently used in the "Areas We Serve" section
 
 ## Footer
 
@@ -32,4 +25,9 @@ We'll experiment with logo variations, and Toni will make the final decision
 
 ## All sections
 
-- [ ] Use a thinner font for the headers, the top menu and the text on the hero image
+- [ ] Use Arial instead of Arial Black as the font for the headers, the top menu and the text on the hero image, bold (800).
+
+## New Images
+
+- [ ] Add a map to the "Areas We Serve" section
+- [ ] Add a translucent compass logo to the "Call Us" banner
