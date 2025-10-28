@@ -722,7 +722,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Mobile Responsive */
-@media (max-width: 768px) {
+@media (max-width: 840px) {
     .top-banner {
         font-size: 0.85rem;
         padding: 10px 0;
