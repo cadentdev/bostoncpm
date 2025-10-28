@@ -29,5 +29,5 @@
 
 ## New Images
 
-- [ ] Add a map to the "Areas We Serve" section
-- [ ] Add a translucent compass logo to the "Call Us" banner
+- [x] Add a map to the "Areas We Serve" section
+- [x] Add a translucent compass logo to the "Call Us" banner
