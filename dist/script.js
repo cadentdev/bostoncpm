@@ -65,12 +65,12 @@ const navbar = document.querySelector('.navbar');
 window.addEventListener('scroll', () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-    // Maintain translucent effect, increase opacity on scroll
-    if (scrollTop > 50) {
+    // Maintain translucent effect, decrease opacity on scroll
+    if (scrollTop > 80) {
         navbar.style.backgroundColor = 'rgba(249, 250, 251, 0.85)';
         navbar.style.backdropFilter = 'blur(15px)';
     } else {
-        navbar.style.backgroundColor = 'rgba(249, 250, 251, 0.75)';
+        navbar.style.backgroundColor = 'rgba(249, 250, 251, 0.90)';
         navbar.style.backdropFilter = 'blur(10px)';
     }
 

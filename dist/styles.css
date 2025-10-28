@@ -70,7 +70,8 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Arial Black", Arial, sans-serif;
+    font-family: Arial, sans-serif;
+    font-weight: 800;
     color: var(--brand-primary);
     line-height: 1.1;
     letter-spacing: -0.02em;
@@ -84,13 +85,15 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Navigation */
 .navbar {
-    background: rgba(249, 250, 251, 0.75);
+    background: rgba(249, 250, 251, 0.90);
     backdrop-filter: blur(10px);
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     position: fixed;
     top: 44px;
     width: 100%;
     z-index: 1000;
+    pointer-events: auto;
+    transition: background-color 1s ease, backdrop-filter 1s ease;
 }
 
 .nav-container {
@@ -182,7 +185,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Hero Section */
 .hero {
     padding: 0;
-    margin-top: 164px;
+    margin-top: 44px;
 }
 
 .hero-image-container {
@@ -647,8 +650,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Footer */
 .footer {
-    background: var(--bg-dark);
-    color: white;
+    background: var(--bg-secondary);
+    color: var(--text-dark);
     padding: var(--section-spacing) 0 30px;
 }
 
@@ -664,21 +667,17 @@ h1, h2, h3, h4, h5, h6 {
     width: 502px;
     height: 273px;
     margin-bottom: 15px;
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .footer-service-areas h2 {
-    color: var(--footer-text-light);
+    color: var(--brand-primary);
     font-size: 1.8rem;
     margin-bottom: 15px;
     text-align: left;
 }
 
 .footer-service-areas p {
-    color: var(--footer-text-muted);
+    color: var(--text-secondary);
     font-size: 0.875rem;
     line-height: 1.6;
     text-align: left;
@@ -689,7 +688,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .tagline {
-    color: var(--footer-text-muted);
+    color: var(--text-secondary);
     font-style: italic;
     text-align: center;
     margin-top: 10px;
@@ -703,23 +702,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer-links a {
-    color: var(--footer-links);
+    color: var(--text-dark);
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .footer-links a:hover {
-    color: white;
+    color: var(--brand-primary);
 }
 
 .footer-bottom {
-    border-top: 1px solid var(--footer-border);
+    border-top: 1px solid var(--border-light);
     padding-top: 20px;
     text-align: center;
 }
 
 .footer-bottom p {
-    color: var(--footer-text-muted);
+    color: var(--text-secondary);
 }
 
 /* Mobile Responsive */
@@ -761,7 +760,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .hero {
-        margin-top: 160px;
+        margin-top: 100px;
     }
 
     .hero-overlay {
@@ -837,7 +836,6 @@ h1, h2, h3, h4, h5, h6 {
         width: 100%;
         max-width: 400px;
         height: auto;
-        padding: 15px;
     }
 }
 

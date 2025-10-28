@@ -15,17 +15,17 @@
 
 ## Areas We Serve section
 
-- [ ] Replace the "Contact Us" photo with the one currently used in the "Areas We Serve" section
+- [x] Replace the "Contact Us" photo with the one currently used in the "Areas We Serve" section
 
 ## Footer
 
-- [ ] Change the footer to a light gray, same as the "Areas We Serve" section
-- [ ] Change the font color of the footer to be dark (or black), using the same color as the other dark text on the site. Use consistent header colors too.
-- [ ] Remove the rectangle around the logo
+- [x] Change the footer to a light gray, same as the "Areas We Serve" section
+- [x] Change the font color of the footer to be dark (or black), using the same color as the other dark text on the site. Use consistent header colors too.
+- [x] Remove the rectangle around the logo
 
 ## All sections
 
-- [ ] Use Arial instead of Arial Black as the font for the headers, the top menu and the text on the hero image, bold (800).
+- [x] Use Arial instead of Arial Black as the font for the headers, the top menu and the text on the hero image, bold (800).
 
 ## New Images
 
