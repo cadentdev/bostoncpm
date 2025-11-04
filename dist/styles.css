@@ -655,13 +655,19 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.1s, box-shadow 0.1s;
     width: 50%;
     margin: 0 auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
 .contact-form button:hover {
     background: var(--primary-hover);
+}
+
+.contact-form button:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 /* Footer */
