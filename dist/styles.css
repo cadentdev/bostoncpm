@@ -518,8 +518,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .areas-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    grid-template-columns: 1fr;
+    gap: 40px;
     align-items: start;
 }
 
