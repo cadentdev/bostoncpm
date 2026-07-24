@@ -19,7 +19,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            const offsetTop = target.offsetTop - 80; // Account for fixed navbar
+            const offsetTop = target.offsetTop - 164; // Account for fixed navbar + banner (44px + 120px)
             window.scrollTo({
                 top: offsetTop,
                 behavior: 'smooth'
@@ -64,16 +64,16 @@ const navbar = document.querySelector('.navbar');
 
 window.addEventListener('scroll', () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    // Add/remove background opacity based on scroll position
-    if (scrollTop > 50) {
-        navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
-        navbar.style.backdropFilter = 'blur(10px)';
+
+    // Maintain translucent effect, decrease opacity on scroll
+    if (scrollTop > 80) {
+        navbar.style.backgroundColor = 'rgba(249, 250, 251, 0.85)';
+        navbar.style.backdropFilter = 'blur(15px)';
     } else {
-        navbar.style.backgroundColor = '#fff';
-        navbar.style.backdropFilter = 'none';
+        navbar.style.backgroundColor = 'rgba(249, 250, 251, 0.90)';
+        navbar.style.backdropFilter = 'blur(10px)';
     }
-    
+
     lastScrollTop = scrollTop;
 });
 

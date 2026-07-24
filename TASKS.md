@@ -1,5 +1,8 @@
 # TASKS
 
+- [x] Fix the hamburger menu pop-up
+  - [x] Align top of the pop-up menu to the bottom of the navbar, eliminating the gap
+  - [x] Match translucence (opacity) of the pop-up menu to the navbar
 - [x] Update hero image with `property_management_guy.jpg` image
     - [x] Move overlay text to right side of image
 - [x] Update "Areas We Serve" image to use zoshua-colah image
